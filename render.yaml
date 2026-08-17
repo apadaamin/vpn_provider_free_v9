@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: freegate-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && chmod +x scripts/install_singbox.sh && ./scripts/install_singbox.sh
+    startCommand: PATH="$PWD/bin:$PATH" python -m app.main
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: BOT_TOKEN
+        sync: false
+      - key: BOT_USERNAME
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: TURSO_DATABASE_URL
+        sync: false
+      - key: TURSO_AUTH_TOKEN
+        sync: false
+      - key: KEEPALIVE_ENABLED
+        value: "false"
+      - key: KEEPALIVE_INTERVAL
+        value: "180"
+      - key: KEEPALIVE_URL
+        sync: false
